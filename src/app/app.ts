@@ -15,10 +15,11 @@ task:string="";
 date:string="";
 hh=signal(0);
 mm=signal(0);
+status=false;
 message=signal("");
 msgClass="";
 updateId=0;
-taskList:{id:number,task:string,date:string,hh:number,mm:number}[]=[];
+taskList:{id:number,task:string,date:string,hh:number,mm:number,status:boolean}[]=[];
 formValidation=()=>{
   if(this.task.trim()!=="")
   {
@@ -50,7 +51,7 @@ formValidation=()=>{
 addTask=()=>{
     let i=this.taskList.length+1;
     console.log(i);
-    this.taskList.push({id:i,task:this.task.trim(),date:this.date,hh:this.hh(),mm:this.mm()});
+    this.taskList.push({id:i,task:this.task.trim(),date:this.date,hh:this.hh(),mm:this.mm(),status:this.status});
     this.setDefaultValue();
     (document.getElementById('taskInput') as HTMLInputElement).focus();
     this.showMessage("New task created...","text-success");
@@ -121,9 +122,9 @@ cancelEdit=()=>{
 constructor()
 {
       this.taskList.push(
-        {id:1,task:"Learning .Net Core",date:"2026-06-12",hh:1,mm:30},
-        {id:2,task:"Learning Angular",date:"2026-06-12",hh:2,mm:30},
-        {id:3,task:"Practice Query",date:"2026-06-12",hh:1,mm:0}
+        {id:1,task:"Learning .Net Core",date:"2026-06-12",hh:1,mm:30,status:true},
+        {id:2,task:"Learning Angular",date:"2026-06-12",hh:2,mm:30,status:true},
+        {id:3,task:"Practice Query",date:"2026-06-12",hh:1,mm:0,status:true}
       );
   effect(()=>{
     this.mm.set(Math.floor(this.mm()))

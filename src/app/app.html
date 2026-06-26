@@ -1,6 +1,6 @@
 <h2 class="bg-secondary text-light p-2 text-center">{{title()}}</h2>
 <div class="d-flex align-items-center justify-content-center h-100 w-100">
-  <div class="d-flex align-items-center justify-content-between gap-4 pt-2 pb-2  h-100 w-25 flex-column bg-success rounded-2 bg-opacity-50 p-2">
+  <div class="d-flex align-items-center justify-content-between gap-2 pt-2 pb-2  h-100 w-25 flex-column bg-success rounded-2 bg-opacity-50 p-2">
     <h3 class="fw-bolder">{{caption()}}</h3>
     <input type="text" [(ngModel)]="task" placeholder="Enter Task" id="taskInput" class="form-control">
     <input type="date" [(ngModel)]="date" id="dateInput" class="form-control">
@@ -24,22 +24,23 @@
 <div class="d-flex align-items-center  gap-4 pt-2 pb-2 h-100 w-100 flex-wrap px-5">
 @for(t of taskList;track t)
 {
-<div class="d-flex align-items-center gap-3 p-2 pb-2 bg-secondary bg-opacity-50 rounded-2 h-25 w-25 flex-column flex-wrap">
-    <div class="fw-bold fs-2">
+<div class="d-flex align-items-center gap-1 p-2 bg-secondary bg-opacity-50 rounded-2 h-25 w-25 flex-column flex-wrap">
+    <div class="fw-bold fs-3">
       {{t.task}}
     </div>
     <div>
       <b>Duration : <span>{{t.hh}} HH</span> : <span>{{t.mm}} MM</span></b>
     </div>
-    <div class="d-flex align-items-center justify-content-between gap-4 pt-2 pb-2  h-100 w-100">
-      <span class="text-dark">Created At : 
-        {{t.date}}
-      </span>
-      <div class="d-flex align-items-center justify-content-end gap-3 pt-2 pb-2  h-100 w-100 ">
-        <button class="rounded-2 w-25 bg-primary text-white fw-bold border-0 p-1" (click)="editTask(t.id)">Edit</button>
-        <button class=" bg-danger rounded-2 text-white w-25 fw-bold border-0 p-1" (click)="deleteTask($index)">Delete</button>
-      </div>
+    <div>
+      Created At : {{t.date}}
     </div>
+    <div class="{{ t.status ? 'bg-success' : 'bg-warning' }} rounded-2 bg-opacity-75 px-1 text-light">
+      {{ t.status===false ? 'Completed':'Pending' }}
+    </div>
+      <div class="d-flex align-items-center justify-content-end gap-3 h-100 w-100 pt-2">
+        <button class="rounded-2 w-50 bg-primary text-white fw-bold border-0 p-1" (click)="editTask(t.id)">Edit</button>
+        <button class=" bg-danger rounded-2 text-white w-50 fw-bold border-0 p-1" (click)="deleteTask($index)">Delete</button>
+      </div>
 </div>
   }
 
