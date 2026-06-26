@@ -25,7 +25,7 @@ formValidation=()=>{
   {
     if(this.date!=="")
     {
-      if((this.mm()!==0&&this.hh()===0)||(this.mm()===0&&this.hh()!==0)||(this.mm()!==0&&this.hh()!==0))
+      if((this.mm()>0&&this.hh()>=0)||(this.mm()>=0&&this.hh()>0)||(this.mm()>0&&this.hh()>0))
       {
         return true;
       }
@@ -50,7 +50,6 @@ formValidation=()=>{
 }
 addTask=()=>{
     let i=this.taskList.length+1;
-    console.log(i);
     this.taskList.push({id:i,task:this.task.trim(),date:this.date,hh:this.hh(),mm:this.mm(),status:this.status});
     this.setDefaultValue();
     (document.getElementById('taskInput') as HTMLInputElement).focus();
@@ -80,7 +79,7 @@ deleteTask=(index:number)=>{
 
 //edit task
 editTask=(i:number)=>{
-  let _task=this.taskList.find(t=>t.id==i);
+  let _task=this.taskList.find(t=>t.id===i);
   console.log(_task);
   console.log(this.taskList);
   if(_task!=null)
@@ -97,7 +96,7 @@ editTask=(i:number)=>{
 //update task
 updateTask=(updateId:number)=>
 { 
-  const _task=this.taskList.find(t=>t.id=updateId);
+  const _task=this.taskList.find(t=>t.id===updateId);
   if(_task!=null)
   {
     _task.date=this.date;
@@ -113,6 +112,24 @@ updateTask=(updateId:number)=>
   this.caption.set("New Task");
   this.setDefaultValue();
 }
+//mark as completed
+markCompleted=(id:number)=>{
+  const _task=this.taskList.find(t=>t.id===id);
+  if(_task!=null)
+  {
+    _task.status=true;
+    console.log(this.taskList)
+  }
+}
+//Marked as incompleted
+markInCompleted=(id:number)=>{
+  const _task=this.taskList.find(t=>t.id===id);
+  if(_task!=null)
+  {
+    _task.status=false;
+    console.log(this.taskList)
+  }
+}
 //cancel update
 cancelEdit=()=>{
   this.setDefaultValue();
@@ -127,7 +144,6 @@ constructor()
         {id:3,task:"Practice Query",date:"2026-06-12",hh:1,mm:0,status:true}
       );
   effect(()=>{
-    this.mm.set(Math.floor(this.mm()))
     if(this.mm()>60)
     {
       this.hh.set(this.hh()+Math.floor(this.mm()/60));
