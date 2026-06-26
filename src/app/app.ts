@@ -109,6 +109,7 @@ updateTask=(updateId:number)=>
   {
     this.showMessage("Task Unavailable...","text-danger");
   }
+  this.updateId=0;
   this.caption.set("New Task");
   this.setDefaultValue();
 }
