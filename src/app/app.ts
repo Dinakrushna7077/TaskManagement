@@ -153,4 +153,12 @@ constructor()
   })
 }
 
+
+get pendingTasks(): number {
+  return this.taskList.filter(t => !t.status).length;
+}
+get completedTasks(): number {
+  return this.taskList.filter(t => t.status).length;
+}
+
 }
